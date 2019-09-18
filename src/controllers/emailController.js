@@ -82,6 +82,4 @@ module.exports = async function postEmail(req, res, next) {
             });
         }
     })
-
-    next();
 }
