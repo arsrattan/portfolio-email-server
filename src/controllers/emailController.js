@@ -47,6 +47,7 @@ module.exports = async function postEmail(req, res, next) {
 
     transporter.verify((error, success) => {
         if(error) {
+            console.log('error verifying');
             next(error);
         } else {
             const mail = {
@@ -72,6 +73,7 @@ module.exports = async function postEmail(req, res, next) {
 
             transporter.sendMail(mail, (err, data) => {
                 if(err) {
+                    console.log('error sending');
                     next(err);
                 } else {
                     res.json(data).sendStatus(200);
