@@ -5,6 +5,9 @@ let nodemailer = require('nodemailer');
 const OAuth2 = google.auth.OAuth2;
 
 module.exports = async function postEmail(req, res, next) {
+
+    console.log('new POST');
+
     const name = req.body.name;
     const emailAddress = req.body.emailAddress;
     const phoneNumber = req.body.phoneNumber;
