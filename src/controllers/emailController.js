@@ -21,28 +21,11 @@ module.exports = async function postEmail(req, res, next) {
     console.log('URL: ' + req.originalUrl);
     console.log('Header: ' + JSON.stringify(req.headers));
 
-    const OAuth2Client = new OAuth2(
-        credentials.clientId,
-        credentials.clientSecret,
-        credentials.redirectUrl
-    );
-
-    OAuth2Client.setCredentials({
-        refresh_token: credentials.refreshToken
-    });
-
-    const accessToken = await OAuth2Client.getAccessToken();
-
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            type: 'oauth2',
             user: credentials.user,
             pass: credentials.pass,
-            clientId: credentials.clientId,
-            clientSecret: credentials.clientSecret,
-            refreshToken: credentials.refreshToken,
-            accessToken: accessToken
         }
     });
 
@@ -82,4 +65,5 @@ module.exports = async function postEmail(req, res, next) {
             });
         }
     })
+    next();
 }
